@@ -51,16 +51,18 @@ class _GameDemoState extends State<GameDemo> {
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 90,
             ),
             _customHeadLineCard(),
             SizedBox(
-              height: 50,
+              height: 40,
             ),
-            _customTable(
-              pcAction: pcAction,
-              playerAction: playerAction,
-              gameresult: gameresult,
+            Center(
+              child: _customTable(
+                pcAction: pcAction,
+                playerAction: playerAction,
+                gameresult: gameresult,
+              ),
             ),
             Spacer(),
             Row(
@@ -155,36 +157,36 @@ class _GameDemoState extends State<GameDemo> {
   }
 }
 
-class _customHeadLineCard extends StatelessWidget {
+class _customHeadLineCard extends StatefulWidget {
   const _customHeadLineCard({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<_customHeadLineCard> createState() => _customHeadLineCardState();
+}
+
+class _customHeadLineCardState extends State<_customHeadLineCard> {
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black54,
-      child: SizedBox(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Player win Round: ${playerWin.toString()}\nComputer win Round: ${computerWin.toString()}",
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle2
-                        ?.copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            )
-          ],
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black54, shape: StadiumBorder()),
+      onPressed: () {
+        playerWin = 0;
+        computerWin = 0;
+
+        setState(() {});
+      },
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+        child: Text(
+          "Player win Round: ${playerWin.toString()}\nComputer win Round: ${computerWin.toString()}",
+          style: Theme.of(context)
+              .textTheme
+              .subtitle2
+              ?.copyWith(color: Colors.white),
         ),
       ),
     );
@@ -221,30 +223,34 @@ class _customTable extends StatelessWidget {
                           textAlign: TextAlign.center,
                           "Welcome the Rock-Paper-Scissor game. \tThis game is look like normal RPS game but it isn't normal."),
                     )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            flex: 3,
-                            child: _customTableColumn(
-                              action: pcAction,
-                              title: "Computer Action",
-                            )),
-                        Expanded(
-                            flex: 3,
-                            child: _customTableColumn(
-                                action: playerAction, title: "Player Action")),
-                        Expanded(
-                            flex: 4,
-                            child: Column(
-                              children: [
-                                Text("Game Result"),
-                                Divider(),
-                                Text("$gameresult"),
-                              ],
-                            )),
-                      ],
+                  : Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              flex: 4,
+                              child: _customTableColumn(
+                                action: pcAction,
+                                title: "Computer Action",
+                              )),
+                          Expanded(
+                              flex: 3,
+                              child: _customTableColumn(
+                                  action: playerAction,
+                                  title: "Player Action")),
+                          Expanded(
+                              flex: 3,
+                              child: Column(
+                                children: [
+                                  Text("Game Result"),
+                                  Divider(),
+                                  Text("${gameresult.toUpperCase()}"),
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
             ),
           ],
@@ -271,7 +277,7 @@ class _customTableColumn extends StatelessWidget {
         Divider(),
         Text("$action"),
         Divider(),
-        SizedBox(height: 140, width: 100, child: PngImage(name: action))
+        SizedBox(height: 100, width: 100, child: PngImage(name: action))
       ],
     );
   }

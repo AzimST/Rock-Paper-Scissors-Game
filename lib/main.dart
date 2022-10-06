@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rockpaperscissorsgame/Demos/dragitems.dart';
 import 'package:rockpaperscissorsgame/Demos/gameDemos.dart';
+import 'package:rockpaperscissorsgame/Screens/gameScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(25)))),
         primarySwatch: Colors.grey,
       ),
-      home: GameDemo(),
+      home: DragDemos(),
     );
   }
 }
