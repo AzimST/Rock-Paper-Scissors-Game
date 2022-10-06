@@ -7,18 +7,21 @@ class ProjectTitle {
 }
 
 class PngImage extends StatelessWidget {
-  const PngImage({Key? key, required this.name}) : super(key: key);
+  const PngImage(
+      {Key? key, required this.name, required this.height, required this.size})
+      : super(key: key);
   final String name;
+  final double height, size;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       "assets/images/$name.png",
       fit: BoxFit.contain,
-      height: 300,
+      height: height,
       errorBuilder: (context, error, stackTrace) => Icon(
         Icons.error_outline_outlined,
-        size: 50,
+        size: size,
       ),
     );
   }

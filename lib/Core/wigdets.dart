@@ -133,7 +133,14 @@ class _customTableColumn extends StatelessWidget {
           ...[]
         else ...[
           Divider(),
-          SizedBox(height: 100, width: 100, child: PngImage(name: action))
+          SizedBox(
+              height: 100,
+              width: 100,
+              child: PngImage(
+                name: action,
+                height: 300,
+                size: 50,
+              ))
         ]
       ],
     );
